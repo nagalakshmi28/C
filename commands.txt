@@ -1,0 +1,12 @@
+gcc -Wall -save-temps filename.c –o filename //preprocessing stage
+
+vim filename.i // preprocessing stage
+
+By executing the below command while compiling the code, 
+we get all intermediate files in the current directory along with the executable.
+
+vim filename.s //compilation stage
+
+vim filename.o // assembly stage
+ 
+linking stage -> after this we get a.out (executable file)

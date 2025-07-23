@@ -5,7 +5,7 @@
 #define MUL(a,b) (a) * (b)
 
 #define PRINT_BINARY(num)                \
-do{                                      \	
+do{                                      \
     int count = 0;                       \
     for(int i = 31; i >= 0; i--)          \
     {                                     \
@@ -55,13 +55,13 @@ do{                                      \
 
 #define REVERSE_BITS(num)             \
 ({                                             \
-    uint32_t _n = (num);                       \
-    uint32_t _rev = 0;                         \
-    for (int _i = 0; _i < 32; _i++) {          \
-        if ((_n >> _i) & 1U)                   \
-            _rev |= (1U << (31 - _i));         \
+    uint32_t n = (num);                       \
+    uint32_t rev = 0;                         \
+    for (int i = 0; i < 32; i++) {          \
+        if ((n >> i) & 1U)                   \
+            rev |= (1U << (31 - i));         \
     }                                          \
-    _rev;                                      \
+    rev;                                      \
 })
 #define SWAP_TWO_BITS_ATGIVEN_POS(num, pos1, pos2)\
 ({                                                            \
@@ -86,19 +86,50 @@ do{                                      \
 
 
 #define SWAP_TWO_VARIABLES(a, b) \
-do{                   \	
-	(a) ^= (b);    \
+do{                   \
+	(a) ^= (b);   \
         (b) ^= (a);   \
         (a) ^= (b);   \
 }while(0)	  
 
-#define SIZE_OF(var) (((char*)(&var + 1)) - ((char*)(&var))) 
-int main()
+#define SIZE_OF(var) (((char*)(&var + 1)) - ((char*)(&var)))
+
+struct stu
 {
-	//printf("%d \n", MUL(2,3));
-	//printf("%d \n", MUL(5-2, 7 + 4));
-	int num = 0x6;
-        PRINT_BINARY(num);
+	char name1[20];
+        int roll_no;
+	char name2;
+	int sal;
+};
+
+
+#define IS_EVEN(num) ((((num) % 2) == 0) ? "even" : "odd")
+
+#define MAX1(a, b) ((a) > (b) ? a : b)
+
+#define MAX2(a, b, c)  (((a) > (b)) && ((a) > (c)) ? a : ((b) > (c)) ? b : c)
+
+#define MAX3(a, b, c)  \
+	({             \
+	   int max = (a) > (b) ? (a) : (b);\
+	    max > (c) ? max : c;           \
+	 })
+
+#define PRINT_STRING(x) printf(#x)  //STRINGIZING OPERATOR
+
+#define TOKEN_PASTING(a, b) a ## b
+
+#define A 20
+
+#define B 20
+    
+int main()    
+{
+	struct stu e1; 
+	//printf("%d \n", MUL(2, 3));
+	//printf("%d \n", MUL(5 - 2, 7 + 4));
+	int num2 = 7;
+        //PRINT_BINARY(num);
 	/*num = SET_BIT(num, 3);
 	num = CLEAR_BIT(num, 1);
 	num = TOGGLE_BIT(num, 3);
@@ -120,9 +151,34 @@ int main()
 	//PRINT_BINARY(num);
 	int x = 5, y = 2;
 	SWAP_TWO_VARIABLES(x,y);
-	printf("after swap %d %d\n", x, y);*/
+	printf("after swap %d %d\n", x, y);
 	char x;
-	printf("size %d\n",SIZE_OF(x));
+	printf("size %ld\n", SIZE_OF(e1));
+
+	printf("%s\n", IS_EVEN(num));
+	int x = 10, y = 2, z = 20;
+	printf("%d\n", MAX3(x, y, z));
         
+	PRINT_STRING(hello);
+	printf("%d\n", TOKEN_PASTING(num, 2));*/
+
+	int res;
+        #if(A > B)
+	{
+		res = A + B;
+		printf("sum =%d\n", res);
+	}
+        #elif(A == B)
+	{
+		res = A - B;
+		printf("diff =%d\n", res);
+	}
+        #else
+	{
+		res = A * B;
+		printf("mul =%d\n", res);
+	}
+        #endif
+
 	return 0;
 }	

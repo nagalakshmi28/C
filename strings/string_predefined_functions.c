@@ -2,20 +2,20 @@
 
 #include <string.h>
 
-int mystrlen(char str[])
+int mystrlen(const char str[])
 {
-       int len = 0;	
-       while(str[len] != '\0')
-       {
-	       len++;
-       }
-       return len;       
+	int len = 0;	
+	while(str[len] != '\0')
+	{
+		len++;
+	}
+	return len;       
 }
 
 
-int reverse_string(char str[])
+void reverse_string(char str[])
 {
-	int i,j;
+	int i = 0, j = 0;
 	char temp;
 	for(i = 0, j = mystrlen(str) - 1; i < j; i++, j--)
 	{
@@ -25,77 +25,75 @@ int reverse_string(char str[])
 	}
 }
 
-char count_vowels(char str[ ])
+int count_vowels(const char str[ ])
 {
-    char ch;
-    int i, count = 0;
-    while(str[i] != '\0')
-    {
-	    ch = str[i];
+	char ch;
+	int i = 0, count = 0;
+	while(str[i] != '\0')
+	{
+		ch = str[i];
 
-	    if(ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' || 
-			    ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
-		   count ++;
-	    i++; 
-    }
-    return count;
+		if(ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' || 
+				ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+			count ++;
+		i++; 
+	}
+	return count;
 }
 
 
-char remove_vowels(char str[ ])
+void remove_vowels(char str[ ])
 {
-    char ch, result[100];
-    int i = 0, j = 0, count = 0;
-    while(str[i] != '\0')
-    {
-            ch = str[i];
+	char ch, result[100];
+	int i = 0, j = 0, count = 0;
+	while(str[i] != '\0')
+	{
+		ch = str[i];
 
-            if(!(ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' || 
-				   ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ))
-            {
-		    result[j++] = ch;
-	    }
-            i++;
-    }
-    result[j] = '\0';
-    printf("string after removing vowels %s \n", result);
+		if(!(ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' || 
+					ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ))
+		{
+			result[j++] = ch;
+		}
+		i++;
+	}
+	result[j] = '\0';
+	printf("string after removing vowels %s \n", result);
 }
 
 
-int remove_all_spaces(char str[])
+void remove_all_spaces(char str[])
 {
-    int i = 0, j = 0;
-    while(str[i])
-    {
-        if(str[i] != ' ')
-           str[j++] = str[i];
-        i++;
-    }
-    str[j] = '\0';
+	int i = 0, j = 0;
+	while(str[i])
+	{
+		if(str[i] != ' ')
+			str[j++] = str[i];
+		i++;
+	}
+	str[j] = '\0';
 }
 
 
-int remove_extra_spaces(char str[])
+void remove_extra_spaces(char str[])
 {
 	int i = 0 , j = 0, is_space = 0, len = strlen(str);
 	while(i < len)
 	{
-            if(str[i] != ' ')
-	    {
-		    
-		    break;
-		    
-	    }
-	    i++;
+		if(str[i] != ' ')
+		{
+			break;	    
+		}
+		i++;
 	}   
 	for( ; i < len; i++)
 	{
 		if(str[i] != ' ')
 		{
 			str[j++] = str[i];
-		        is_space = 0;
+			is_space = 0;
 		}
-	        else if(is_space == 0)
+		else if(is_space == 0)
 		{
 			str[j++] = str[i];
 			is_space = 1;
@@ -104,48 +102,52 @@ int remove_extra_spaces(char str[])
 	if(j > 0 && str[j -1] == ' ')
 		j--;
 	str[j] = '\0';
-	
+
 }
 
 
-int my_strcpy(char src[], char dest[])
+char *my_strcpy(char dest[], const char src[])
 {
-    int i = 0;
-    while(src[i] != 0)
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
+	int i = 0;
+	while(src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+
+	return dest;
 }
 
 
-void my_strncpy(char *src[], char *dest[], int n)
+char *my_strncpy(char *dest[], const char *src[], int n)
 {
-    int i;
-    while(src[i] != 0)
-    {
-	    dest[i] = src[i];
-	    i++;
-    }
-    dest[i] = '\0';
+	int i = 0;
+	while(n-- && src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return dest;
 }	
 
 
-int my_strcmp(char str1[],char str2[])
+int my_strcmp(const char str1[], const char str2[])
 {
-    int i = 0;
-    while(str1[i] == str2[i])
-    {
-        if(str1[i] == '\0')
-           return 0;
-    i++;
-    }
-    return str1[i] - str2[i];
+	int i = 0;
+	while(str1[i] == str2[i])
+	{
+		if(str1[i] == '\0' && str2[i] == '\0') 
+			return 0;
+		i++;
+	}
+
+	return str1[i] - str2[i];
 }
 
 
-void my_strcat(char *dest, char *src)
+char *my_strcat(char *dest, const char *src)
 {
 	int i = 0, j = 0;
 	while(dest[i] != '\0')
@@ -157,10 +159,12 @@ void my_strcat(char *dest, char *src)
 		dest[i++] = src[j++];
 	}
 	dest[i] = '\0';
+
+	return dest;
 }
 
 
-int my_strncat(char *dest, char *src, int n)
+char *my_strncat(char *dest, const char *src, int n)
 {
 	int i = 0, j = 0;
 	while(dest[i] != '\0')
@@ -172,10 +176,12 @@ int my_strncat(char *dest, char *src, int n)
 		dest[i++] = src[j++];
 	}
 	dest[i] = '\0';
+
+	return dest;
 }
 
 
-char *my_strchr(char *str, char ch)
+char *my_strchr(const char *str, const char ch)
 {
 	while( *str != '\0')
 	{
@@ -185,11 +191,12 @@ char *my_strchr(char *str, char ch)
 		}
 		str++;
 	}
+
 	return NULL; 
 }
 
 
-char *my_strrchr(char *str, char ch)
+char *my_strrchr(const char *str, const char ch)
 {
 	char *last = NULL;
 	while(*str != '\0')
@@ -200,11 +207,12 @@ char *my_strrchr(char *str, char ch)
 		}
 		str++;
 	}
+
 	return last;
 }
 
 
-char *my_strstr(char *str, char *substr)
+char *my_strstr(const char *str, const char *substr)
 {
 	if(*substr == '\0')
 	{
@@ -221,7 +229,7 @@ char *my_strstr(char *str, char *substr)
 		}
 		if(*sub == '\0')
 		{
-			return str;
+			return (char *)str;
 		}
 		str++;
 	}
@@ -231,11 +239,11 @@ char *my_strstr(char *str, char *substr)
 
 char to_upper(char ch)
 {
-   if(ch >= 'a' && ch <= 'z')
-   {
-	   return ch - 32;
-   }	   
-   return ch;
+	if(ch >= 'a' && ch <= 'z')
+	{
+		return ch - 32;
+	}	   
+	return ch;
 }
 
 void capital_first_letter(char *str)
@@ -250,15 +258,16 @@ void capital_firstletter_afterspace(char *str)
 {
 	char temp[100], result[100];
 	my_strcpy(temp, str);
-	char *token = strtok(temp, " \t");
+	char *token = strtok(temp, " ");
 	while(token != NULL)
 	{
 		capital_first_letter(token);
 		my_strcat(result, token);
 		my_strcat(result, " ");
-                token = strtok(NULL, " \t");
+		token = strtok(NULL, " ");
 	}
 	strcpy(str, result);
+
 } 	
 
 int main ( )
@@ -266,102 +275,102 @@ int main ( )
 	//char str[] = "      naga lak sh mi ";
 	/* printf("length of string %d \n", mystrlen(str));
 
-	reverse_string(str);
-	printf("reverse string %s \n", str);
-        strcpy(str2, str1);
-        reverse_string(str2);
-        if(strcmp(str1, str2) == 0)
-        {
-           printf("palindrome\n");
-        }
-        else
-        {
-                printf("not palindrome\n");
-        }
+	   reverse_string(str);
+	   printf("reverse string %s \n", str);
+	   strcpy(str2, str1);
+	   reverse_string(str2);
+	   if(strcmp(str1, str2) == 0)
+	   {
+	   printf("palindrome\n");
+	   }
+	   else
+	   {
+	   printf("not palindrome\n");
+	   }
 
-	printf("no.of vowels %d in string \n", count_vowels(str));
+	   printf("no.of vowels %d in string \n", count_vowels(str));
 
-	remove_vowels(str);
+	   remove_vowels(str);
 
-	remove_spaces(str);
+	   remove_spaces(str);
 
-	printf(" string after removing spaces %s \n", str);
-        
-	char src[] = "hello", dest[100];
-        my_strcpy(src,dest);
-	printf("copied string %s \n", dest);
+	   printf(" string after removing spaces %s \n", str);
 
-	char src[] = "hello", dest[100];
-        my_strncpy(dest, src, 3);
-        printf(" %s\n", dest);	
+	   char src[] = "hello", dest[100];
+	   my_strcpy(src,dest);
+	   printf("copied string %s \n", dest);
 
-	printf(" removing extra spaces:%s \n", str);
-	remove_extra_spaces(str);
-	printf(" removing extra spaces:%s \n", str);
+	   char src[] = "hello", dest[100];
+	   my_strncpy(dest, src, 3);
+	   printf(" %s\n", dest);	
 
-	char dest[100] = "hello", src[] = "world";
-	my_strncat(dest, " ", 1);
-	my_strncat(dest,src,2);
-	printf("%s \n", dest);
+	   printf(" removing extra spaces:%s \n", str);
+	   remove_extra_spaces(str);
+	   printf(" removing extra spaces:%s \n", str);
 
-	char str[ ] = "sasuke";
-	char ch = 's';
-        char *ptr = my_strchr(str, ch);
-	if(ptr == NULL)
-	{
-		printf("character is not found\n");
-	}
+	   char dest[100] = "hello", src[] = "world";
+	   my_strncat(dest, " ", 1);
+	   my_strncat(dest,src,2);
+	   printf("%s \n", dest);
+
+	   char str[ ] = "sasuke";
+	   char ch = 's';
+	   char *ptr = my_strchr(str, ch);
+	   if(ptr == NULL)
+	   {
+	   printf("character is not found\n");
+	   }
+	   else
+	   {
+	   printf("character %c is found in string %s at %ld\n", ch, str, ptr - str);
+	   }
+
+	   char *ptr = my_strrchr(str, ch);
+	   if(ptr == NULL)
+	   {
+	   printf("character is not found\n");
+	   }
+	   else
+	   {
+	   printf("character %c is found in string %s at %ld\n", ch, str, ptr - str);
+	   }
+
+	   char str[] = "abcdefghi";
+	   char substr[] = "def";
+	   char *ptr = my_strstr(str, substr);
+	   if(ptr == NULL)
+	   {
+	   printf("not found %s\n",substr);
+	   }
+	   else
+	   {
+	printf("substring %s is found at %ld\n", substr, ptr - substr);
+}
+int result;
+char str1[] = "itachi", str2[] = "itachi"; 	
+result = my_strcmp(str1,str2);
+if(result == 0)
+	printf("equal\n");
 	else
-	{
-		printf("character %c is found in string %s at %ld\n", ch, str, ptr - str);
-	}
+	printf("not equal\n");
 
-	char *ptr = my_strrchr(str, ch);
-        if(ptr == NULL)
-        {
-                printf("character is not found\n");
-        }
-        else
-        {
-                printf("character %c is found in string %s at %ld\n", ch, str, ptr - str);
-        }
-
-	char str[] = "abcdefghi";
-        char substr[] = "def";
-	char *ptr = my_strstr(str, substr);
-	if(ptr == NULL)
-	{
-		printf("not found %s\n",substr);
-	}
-	else
-	{
-		printf("substring %s is found at %ld\n", substr, ptr - substr);
-	}
-	int result;
-        char str1[] = "itachi", str2[] = "itachi"; 	
-	result = my_strcmp(str1,str2);
-        if(result == 0)
-           printf("equal\n");
-        else
-           printf("not equal\n");
-	
 	char str[] = "kakashi";
-        int pos = 2;
-        //memmove(&str[pos], &str[pos] + 1, strlen(str) - 1); // remove character from word
+	int pos = 2;
+	//memmove(&str[pos], &str[pos] + 1, strlen(str) - 1); // remove character from word
 	memmove(&str[pos+1], &str[pos], strlen(str) - pos +1); // insert character
-        str[pos] = 'T';							       
-        printf("%s\n", str);
+	str[pos] = 'T';							       
+	printf("%s\n", str);
 
 	char src[] = "sasuke";
-        char dest[20];
-        memcpy(dest, src + 2, 4);
-        dest[4] = '\0';
-        printf("%s\n", dest);*/	
-         
+	char dest[20];
+	memcpy(dest, src + 2, 4);
+	dest[4] = '\0';
+	printf("%s\n", dest);*/	
+
 	char str[] = "c programming";
-        //capital_first_letter(str);
+	//capital_first_letter(str);
 	capital_firstletter_afterspace(str);
-        printf("%s\n", str);	
-      
+	printf("%s\n", str);	
+
 	return 0;
-}	
+	}	
